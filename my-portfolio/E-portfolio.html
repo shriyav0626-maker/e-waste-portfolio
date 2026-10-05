@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Portfolio | Shriya Vibhute</title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* CSS Variables for Dynamic Theme Switching */
+    :root {
+      /* Enhanced Rich Dark Blue & Green Theme (Default) */
+      --bg-color: #0a192f;        /* Deep navy/midnight blue */
+      --card-bg: #112240;        /* Rich dark blue card background */
+      --subcard-bg: #1d3557;     /* Medium dark blue inset */
+      --nav-bg: rgba(10, 25, 47, 0.95);
+      --border-color: #233554;
+      --text-primary: #ffffff;
+      --text-secondary: #a8b2d1;
+      --text-muted: #8892b0;
+      --accent-green: #10b981;
+      --accent-green-hover: #34d399;
+      --accent-green-dim: rgba(16, 185, 129, 0.15);
+      --shadow-color: rgba(2, 12, 27, 0.7);
+    }
+
+    /* Light Theme Palette */
+    body.light-mode {
+      --bg-color: #e6f0fa;        /* Soft icy blue background */
+      --card-bg: #ffffff;
+      --subcard-bg: #f0f7ff;
+      --nav-bg: rgba(230, 240, 250, 0.95);
+      --border-color: #b0c4de;
+      --text-primary: #0a192f;
+      --text-secondary: #2b3a4a;
+      --text-muted: #5a6b7c;
+      --accent-green: #059669;
+      --accent-green-hover: #10b981;
+      --accent-green-dim: rgba(5, 150, 105, 0.12);
+      --shadow-color: rgba(0, 0, 0, 0.08);
+    }
+
+    /* Global Reset & Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Sticky Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5%;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .nav-brand i {
+      background: var(--accent-green);
+      color: #ffffff;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      padding: 5px 12px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-links a {
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a.active, .nav-links a:hover {
+      background: var(--accent-green);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--accent-green);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    /* Container Structure */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--accent-green-dim);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Hero Section */
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px var(--shadow-color);
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      color: var(--text-primary);
+      margin: 15px 0;
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent-green);
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .student-info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      background: var(--subcard-bg);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 30px;
+    }
+
+    .info-item {
+      text-align: left;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .info-value {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .info-value.highlight {
+      color: var(--accent-green);
+    }
+
+    .quote-box {
+      border-left: 3px solid var(--accent-green);
+      padding-left: 20px;
+      text-align: left;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-green);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-green-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .profile-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .profile-img-container {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--accent-green);
+      margin-bottom: 20px;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-overlay {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(5px);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .card-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .card-title {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title i {
+      color: var(--accent-green);
+    }
+
+    /* Skills Grid */
+    .skills-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-badge {
+      background: var(--subcard-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .skill-badge span {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
+
+    /* Stats Counter Bar */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 1.5rem;
+      color: var(--accent-green);
+      margin-bottom: 10px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+    }
+
+    /* E-Waste Cards Section */
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 30px;
+    }
+
+    .feature-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .bg-green { background: var(--accent-green); color: #ffffff; }
+    .bg-teal { background: #0d9488; color: #ffffff; }
+    .bg-blue { background: #2563eb; color: #ffffff; }
+
+    .checklist {
+      list-style: none;
+      margin-top: 20px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 15px;
+    }
+
+    .checklist li {
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .checklist li i {
+      color: var(--accent-green);
+      margin-top: 3px;
+    }
+
+    .cta-banner {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 30px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    /* Coursework & Assignments Section */
+    .assignments-header {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-green);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--subcard-bg);
+      border: 1px solid var(--border-color);
+      padding: 6px 15px;
+      border-radius: 20px;
+      color: var(--text-primary);
+    }
+
+    .search-box input {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      outline: none;
+      margin-left: 8px;
+    }
+
+    .assignment-display-area {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 30px;
+      min-height: 250px;
+    }
+
+    .uploaded-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .assignment-card {
+      background: var(--subcard-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .assignment-card:hover {
+      border-color: var(--accent-green);
+    }
+
+    .file-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .file-icon {
+      font-size: 1.8rem;
+      color: var(--accent-green);
+    }
+
+    /* Embedded Document Frame */
+    .document-preview-frame {
+      width: 100%;
+      height: 550px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-top: 15px;
+      background: #ffffff;
+    }
+
+    .image-preview-element {
+      width: 100%;
+      max-height: 550px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-top: 15px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 900px) {
+      .about-grid, .cards-grid-3, .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .student-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cta-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i class="fa-solid fa-leaf"></i>
+      <span>Shriya Vibhute | E-Waste Portfolio</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#subject">Subject Overview</a>
+      <a href="#assignments">Assignments</a>
+    </div>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="theme-toggle" title="Toggle Light/Dark Mode">
+      <i class="fa-regular fa-sun"></i>
+    </button>
+  </nav>
+
+  <!-- Section 1: Hero Banner -->
+  <section id="home" class="container">
+    <div class="hero-card">
+      <span class="section-tag">Academic E-Portfolio</span>
+      <h1 class="hero-title">E-Portfolio</h1>
+      <div class="hero-subtitle">E-Waste & Environmental Management</div>
+
+      <div class="student-info-grid">
+        <div class="info-item">
+          <div class="info-label">Student Name</div>
+          <div class="info-value">Shriya Vibhute</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Department</div>
+          <div class="info-value">B.Tech IT</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">College</div>
+          <div class="info-value">VIT Mumbai</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Academic Year</div>
+          <div class="info-value highlight">2024 - Present</div>
+        </div>
+      </div>
+
+      <!-- Environmental Quote -->
+      <div class="quote-box">
+        "The greatest threat to our planet is the belief that someone else will save it." <br>
+        <strong style="color: var(--text-primary);">— Robert Swan</strong>
+      </div>
+
+      <div class="btn-group">
+        <a href="#assignments" class="btn btn-primary"><i class="fa-solid fa-compass"></i> Explore Portfolio</a>
+        <a href="#about" class="btn btn-secondary"><i class="fa-regular fa-user"></i> View About Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: About Student & Resume -->
+  <section id="about" class="container">
+    <div style="text-align: center;">
+      <h2 class="section-title">About Student & Resume</h2>
+      <p class="section-subtitle">IT Student at Vidyalankar Institute of Technology, Mumbai.</p>
+    </div>
+
+    <div class="about-grid">
+      <!-- Profile Column -->
+      <div class="profile-card">
+        <div class="profile-img-container">
+          <img src="student-photo.jpg" alt="Shriya Vibhute Portrait" class="profile-img" id="student-portrait" />
+          <div class="profile-overlay">
+            <h3 style="color: var(--text-primary);">Shriya Vibhute</h3>
+            <p style="color: var(--accent-green); font-size: 0.8rem; font-weight: 600;">IT Student</p>
+            <p style="font-size: 0.75rem;">Vidyalankar Institute of Technology, Wadala</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resume Content Column -->
+      <div>
+        <div class="card-box">
+          <h3 class="card-title"><i class="fa-solid fa-user-gear"></i> Professional Summary</h3>
+          <p>Motivated B.Tech Information Technology student at Vidyalankar Institute of Technology with a solid foundation in Information Technology, SQL, Web Development, Cloud Computing, and data analysis concepts. Dedicated to implementing sustainable tech practices and efficient e-waste management solutions.</p>
+        </div>
+
+        <div class="card-box">
+          <h3 class="card-title"><i class="fa-solid fa-code"></i> Technical & Analytics Skills</h3>
+          <div class="skills-flex">
+            <div class="skill-badge">Python <span>(Programming)</span></div>
+            <div class="skill-badge">Java <span>(Programming)</span></div>
+            <div class="skill-badge">SQL <span>(Programming)</span></div>
+            <div class="skill-badge">C <span>(Programming)</span></div>
+            <div class="skill-badge">C++ <span>(Programming)</span></div>
+            <div class="skill-badge">HTML <span>(Web Dev)</span></div>
+            <div class="skill-badge">CSS <span>(Web Dev)</span></div>
+            <div class="skill-badge">Cloud Computing <span>(GCP/Azure/AWS)</span></div>
+            <div class="skill-badge">Git <span>(Tools)</span></div>
+            <div class="skill-badge">GitHub <span>(Tools)</span></div>
+            <div class="skill-badge">Problem Solving <span>(Soft Skills)</span></div>
+            <div class="skill-badge">Team Collaboration <span>(Soft Skills)</span></div>
+            <div class="skill-badge">Communication <span>(Soft Skills)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Metrics Counter Bar -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-regular fa-file-lines"></i></div>
+        <div class="stat-number" id="uploaded-count-badge">0</div>
+        <div class="stat-label">Assignments Uploaded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-ribbon"></i></div>
+        <div class="stat-number">0</div>
+        <div class="stat-label">Certifications Earned</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Subject Overview -->
+  <section id="subject" class="container">
+    <div style="text-align: center;">
+      <span class="section-tag">Academic Domain</span>
+      <h2 class="section-title">About E-Waste & Environmental Management</h2>
+      <p class="section-subtitle">Exploring the challenges, ecological threats, legal frameworks, and technological solutions involved in managing electronic waste.</p>
+    </div>
+
+    <div class="cards-grid-3">
+      <div class="feature-card">
+        <div class="feature-icon-box bg-green"><i class="fa-solid fa-microchip"></i></div>
+        <h3 style="color: var(--text-primary);">What is E-Waste?</h3>
+        <p style="font-size: 0.8rem; color: var(--accent-green);">Electronic Scrap Definition</p>
+        <p style="font-size: 0.85rem; margin-top: 10px;">Electronic Waste (E-Waste) encompasses discarded electrical or electronic devices—including laptops, smartphones, PCBs, CRTs, and household appliances—that have reached the end of their useful life.</p>
+        <ul class="checklist">
+          <li><i class="fa-solid fa-circle-check"></i> Over 62 Million Tonnes generated globally per year</li>
+          <li><i class="fa-solid fa-circle-check"></i> Fastest growing domestic waste stream (+3% annually)</li>
+          <li><i class="fa-solid fa-circle-check"></i> Contains precious metals alongside hazardous chemicals</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-box bg-teal"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h3 style="color: var(--text-primary);">Why E-Waste is Harmful?</h3>
+        <p style="font-size: 0.8rem; color: #0d9488;">Ecological & Health Hazards</p>
+        <p style="font-size: 0.85rem; margin-top: 10px;">When improperly landfilled or burned in informal sector yards, toxic heavy metals leach into groundwater, bioaccumulate in soil, and release dangerous carcinogenic fumes into the atmosphere.</p>
+        <ul class="checklist">
+          <li><i class="fa-solid fa-circle-check"></i> Lead & Mercury damage human central nervous systems</li>
+          <li><i class="fa-solid fa-circle-check"></i> Cadmium causes kidney degradation & soil toxicity</li>
+          <li><i class="fa-solid fa-circle-check"></i> Brominated Flame Retardants (BFRs) disrupt endocrine health</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-box bg-blue"><i class="fa-solid fa-rotate"></i></div>
+        <h3 style="color: var(--text-primary);">Importance of Recycling</h3>
+        <p style="font-size: 0.8rem; color: #2563eb;">Urban Mining & Conservation</p>
+        <p style="font-size: 0.85rem; margin-top: 10px;">E-waste recycling extracts high-grade Gold, Silver, Palladium, and Copper from circuit scrap, consuming up to 90% less energy than virgin mining operations.</p>
+        <ul class="checklist">
+          <li><i class="fa-solid fa-circle-check"></i> 1 Ton of PCBs yields 40x more gold than 1 ton of ore</li>
+          <li><i class="fa-solid fa-circle-check"></i> Reduces greenhouse gas emissions from raw mining</li>
+          <li><i class="fa-solid fa-circle-check"></i> Prevents toxic landfill contamination</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Framework Cards -->
+    <div class="cards-grid-3">
+      <div class="feature-card">
+        <div class="feature-icon-box bg-green"><i class="fa-solid fa-arrows-spin"></i></div>
+        <h3 style="color: var(--text-primary);">The Circular Economy</h3>
+        <p style="font-size: 0.8rem; color: var(--accent-green);">Closing the Technology Loop</p>
+        <p style="font-size: 0.85rem; margin-top: 10px;">Shifting away from the linear 'Take-Make-Dispose' model toward a closed-loop system where hardware components are designed for modular disassembly and refurbishment.</p>
+        <ul class="checklist">
+          <li><i class="fa-solid fa-circle-check"></i> Modular device assembly for easy repairability</li>
+          <li><i class="fa-solid fa-circle-check"></i> Extended Producer Responsibility (EPR) compliance</li>
+          <li><i class="fa-solid fa-circle-check"></i> Product-as-a-Service leasing business models</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-box bg-green"><i class="fa-solid fa-cubes"></i></div>
+        <h3 style="color: var(--text-primary);">The 3Rs: Reduce, Reuse, Recycle</h3>
+        <p style="font-size: 0.8rem; color: var(--accent-green);">Core Sustainability Hierarchy</p>
+        <p style="font-size: 0.85rem; margin-top: 10px;">A foundational approach ranking environmental priority: first reducing unnecessary gadget purchases, secondly repairing functional tech, and finally recycling scrap.</p>
+        <ul class="checklist">
+          <li><i class="fa-solid fa-circle-check"></i> Reduce: Avoid frequent annual device upgrades</li>
+          <li><i class="fa-solid fa-circle-check"></i> Reuse: Refurbish, donate, or repurpose older hardware</li>
+          <li><i class="fa-solid fa-circle-check"></i> Recycle: Utilize certified municipal e-waste dropoff bins</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-box bg-blue"><i class="fa-solid fa-earth-americas"></i></div>
+        <h3 style="color: var(--text-primary);">UN SDGs & Environmental Goals</h3>
+        <p style="font-size: 0.8rem; color: #2563eb;">Global Impact & Compliance</p>
+        <p style="font-size: 0.85rem; margin-top: 10px;">Directly aligned with UN Sustainable Development Goals—specifically SDG 12 (Responsible Consumption & Production) and SDG 13 (Climate Action).</p>
+        <ul class="checklist">
+          <li><i class="fa-solid fa-circle-check"></i> SDG 12.5: Substantially reduce waste generation by 2030</li>
+          <li><i class="fa-solid fa-circle-check"></i> SDG 12.4: Environmentally sound management of chemicals</li>
+          <li><i class="fa-solid fa-circle-check"></i> SDG 13: Combat climate change via energy savings</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="cta-banner">
+      <div>
+        <h3 style="color: var(--text-primary);">Ready to Practice Responsible E-Waste Management?</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">"Every electronic device recycled prevents toxic soil leaching and conserves critical rare-earth elements."</p>
+      </div>
+      <a href="#assignments" class="btn btn-primary">VIEW STUDENT SUBMISSIONS</a>
+    </div>
+  </section>
+
+  <!-- Section 4: Coursework & Assignments + Dynamic Viewer -->
+  <section id="assignments" class="container">
+    <div style="text-align: center;">
+      <span class="section-tag">Central Repository</span>
+      <h2 class="section-title">Coursework & Assignments</h2>
+      <p class="section-subtitle">Uploaded coursework documents are embedded and viewable directly on the website below.</p>
+    </div>
+
+    <div class="assignments-header">
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">All</button>
+        <button class="tab-btn" onclick="filterCategory('report', this)">Reports</button>
+        <button class="tab-btn" onclick="filterCategory('research', this)">Research</button>
+        <button class="tab-btn" onclick="filterCategory('activity', this)">Activities</button>
+        <button class="tab-btn" onclick="filterCategory('presentation', this)">Presentations</button>
+        <button class="tab-btn" onclick="filterCategory('practical', this)">Practicals</button>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="search-input" placeholder="Search assignments..." onkeyup="searchAssignments()" />
+        </div>
+        <input type="file" id="file-upload-input" style="display: none;" onchange="handleFileUpload(event)" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.txt" />
+        <button class="btn btn-primary" onclick="triggerUpload()"><i class="fa-solid fa-plus"></i> Upload Assignment</button>
+      </div>
+    </div>
+
+    <!-- Assignment Dynamic Grid Container -->
+    <div class="assignment-display-area">
+      <div class="uploaded-grid" id="assignments-grid">
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript Functionality -->
+  <script>
+    // 1. Light / Dark Mode Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeToggleBtn.querySelector('i');
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      
+      if (document.body.classList.contains('light-mode')) {
+        themeIcon.className = 'fa-regular fa-moon';
+      } else {
+        themeIcon.className = 'fa-regular fa-sun';
+      }
+    });
+
+    // 2. Assignment Upload & Direct On-Site Viewing Logic
+    let assignmentCount = 0;
+
+    function triggerUpload() {
+      document.getElementById('file-upload-input').click();
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const fileName = file.name;
+      const fileSize = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+      const fileUrl = URL.createObjectURL(file);
+      const fileType = file.type;
+
+      // Generate direct on-site viewer frame (No Download link)
+      let displayContentHTML = '';
+      if (fileType.startsWith('image/')) {
+        displayContentHTML = `<img src="${fileUrl}" alt="${fileName}" class="image-preview-element" />`;
+      } else {
+        // Render PDF or text/document frame directly on page
+        displayContentHTML = `<iframe src="${fileUrl}" class="document-preview-frame"></iframe>`;
+      }
+
+      const grid = document.getElementById('assignments-grid');
+      const newCard = document.createElement('div');
+      newCard.className = 'assignment-card';
+      newCard.setAttribute('data-category', 'report');
+
+      newCard.innerHTML = `
+        <div>
+          <div class="file-meta">
+            <i class="fa-solid fa-eye file-icon"></i>
+            <div>
+              <strong style="color: var(--text-primary); font-size: 1rem;">${fileName}</strong>
+              <p style="font-size: 0.75rem; color: var(--accent-green);">Size: ${fileSize} • Direct On-Site View</p>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; margin-bottom: 10px; color: var(--text-secondary);">Embedded Document Viewer:</p>
+          ${displayContentHTML}
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Uploaded Just Now</span>
+          <span class="section-tag" style="margin: 0; font-size: 0.7rem; padding: 3px 12px;">Active Document</span>
+        </div>
+      `;
+
+      grid.prepend(newCard);
+
+      assignmentCount++;
+      document.getElementById('uploaded-count-badge').innerText = assignmentCount;
+
+      alert(`"${fileName}" uploaded and is now displayed directly on your portfolio!`);
+    }
+
+    function filterCategory(category, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.assignment-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchAssignments() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const cards = document.querySelectorAll('.assignment-card');
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
